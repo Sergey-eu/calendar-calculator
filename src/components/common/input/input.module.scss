@@ -1,0 +1,85 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.input {
+  @include emptyClassPlug;
+
+  &__field {
+    min-width: 160px;
+    width: 100%;
+    color: $mono-0;
+    background-color: $mono-1;
+    outline: none;
+    border: 1px solid $primary-2;
+    transition: box-shadow $duration1 $easing1, background-color $duration1 $easing1;
+
+    &:focus {
+      background-color: $primary-4;
+      box-shadow: inset 0 0 8px $primary-3;
+    }
+
+    @include hoverDevicesDetection {
+      &:hover {
+        background-color: $primary-4;
+      }
+    }
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    &::placeholder {
+      color: $primary-2;
+    }
+
+    &_size_medium {
+      height: 48px;
+      border-radius: 10px;
+      font-size: 16px;
+      padding: 0 24px;
+    }
+  }
+
+  &__control {
+    position: relative;
+  }
+
+  &__label {
+    color: $primary-1;
+    text-align: left;
+    padding-left: 10px;
+
+    &_size_medium {
+      padding-bottom: 4px;
+      font-size: 14px;
+    }
+  }
+
+  &_width_full {
+    min-width: 100%;
+  }
+
+  &_error {
+    .input__field {
+      background-color: $mono-1;
+      box-shadow: inset 0 0 3px $error;
+      border-color: $error;
+    }
+  }
+
+  &_labeled {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+  }
+
+  &__errorMessage {
+    color: $error;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 12px;
+    padding: 4px 0;
+    text-align: left;
+  }
+}

@@ -1,0 +1,27 @@
+:root {
+  --primary-1: #1d3557;
+  --primary-2: #457b9d;
+  --primary-3: #a8dadc;
+  --primary-4: #e6fbfb;
+  --primary-5: #eefaf7;
+  --mono-0: #222;
+  --mono-1: #fff;
+  --grey-1: #484848;
+  --grey-2: #727275;
+  --grey-3: #ababab;
+  --grey-4: #eaf3f8;
+  --error: #e63946;
+}
+
+$primary-1: var(--primary-1);
+$primary-2: var(--primary-2);
+$primary-3: var(--primary-3);
+$primary-4: var(--primary-4);
+$primary-5: var(--primary-5);
+$mono-0: var(--mono-0);
+$mono-1: var(--mono-1);
+$grey-1: var(--grey-1);
+$grey-2: var(--grey-2);
+$grey-3: var(--grey-3);
+$grey-4: var(--grey-4);
+$error: var(--error);

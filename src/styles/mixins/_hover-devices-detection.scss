@@ -1,0 +1,6 @@
+// Detect if the primary input mechanism system of the device can hover over elements with ease. Widely separated by modern browsers: https://caniuse.com/?search=media%7Bhover%3A%20%7D%20hover
+@mixin hoverDevicesDetection {
+  @media (hover: hover) {
+    @content;
+  }
+}

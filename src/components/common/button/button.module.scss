@@ -1,0 +1,75 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.button {
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+  transition: opacity $duration1 $easing1, background-color $duration1 $easing1;
+  padding: 0 10px;
+  color: #fff;
+  vertical-align: top;
+  max-width: 100%;
+  overflow: hidden;
+  outline: none;
+  border: none;
+
+  &__label {
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &_theme {
+    &_primary {
+      background-color: $primary-1;
+      font-weight: 500;
+
+      @include hoverDevicesDetection {
+        &:hover {
+          background-color: $primary-2;
+        }
+      }
+
+      &:active {
+        box-shadow: inset 0 0 8px $primary-1;
+      }
+    }
+  }
+
+  &_size {
+
+    &_medium {
+      padding-top: 14px;
+      padding-bottom: 14px;
+      min-width: 160px;
+      border-radius: 10px;
+
+      .button {
+        &__label {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  &_width {
+
+    &_full {
+      width: 100%;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}

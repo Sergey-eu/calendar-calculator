@@ -1,9 +1,8 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import { Input } from '../../common';
 import { getDateParts } from '../../../helpers/common-functions';
-import styles from './calculator-input-manual.module.scss';
 
-export namespace CalculatorInputManual {
+export namespace CalculatorInput {
 
   export type InputProps = Readonly<{
     value: string;
@@ -29,7 +28,7 @@ export namespace CalculatorInputManual {
     const [errorMessage, setErrorMessage] = useState<Array<string>>([]);
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-      // allow numeric value only
+      // allow numeric input only
       const e = event.nativeEvent as any;
       if (!/[0-9]/i.test(e.data) && e.inputType !== 'deleteContentBackward') {
         return
@@ -42,6 +41,11 @@ export namespace CalculatorInputManual {
       } else if (newDate.match(/^\d{2}\s\/$/) || newDate.match(/^\d{2}\s\/\s\d{2}\s\/$/)) {
         setDate(newDate.slice(0, -3));
       } else {
+        // prevent mask elements removing by user
+        if ((newDate.length >= 5 && (newDate.match(/\s\/\s/g) || []).length < 1) ||
+          (newDate.length >= 7 && (newDate.match(/\s\/\s/g) || []).length < 2)) {
+          return
+        }
         setDate(newDate);
       }
 
@@ -49,7 +53,7 @@ export namespace CalculatorInputManual {
       const isValid = isDateValid(event.target.value)
       setValid(isValid)
 
-      // update filed status
+      // update form status
       onChange({
         value: newDate,
         valid: isValid,
@@ -62,13 +66,10 @@ export namespace CalculatorInputManual {
       if (year > 2999 || year < 1901 || isNaN(year)) {
         errors.push('The year is not in the valid range, please select between 1901 and 2999');
       }
-      if (month > 11 || month < 0 || isNaN(month) ) {
+      if (month > 11 || month < 0 || isNaN(month)) {
         errors.push('The month is not in the valid range, select from 01 to 12');
       }
-      if (day === 0 || day.toString().length < 2) {
-        errors.push('Correct day is required');
-      }
-      if (newDate.getDate() !== day && newDate.toString() !== 'Invalid Date') {
+      if ((newDate.getDate() !== day && newDate.toString() !== 'Invalid Date') || day === 0) {
         errors.push('There is no such day');
       }
       setErrorMessage(errors)
@@ -76,10 +77,9 @@ export namespace CalculatorInputManual {
 
     const isDateValid = (date: string) => {
       const year = getDateParts(date).year;
-      const month = getDateParts(date).month-1;
+      const month = getDateParts(date).month - 1;
       const day = getDateParts(date).day;
       const newDate = new Date(year, month, day);
-
       if (
         // Date range check
         year < 3000 &&
@@ -94,26 +94,26 @@ export namespace CalculatorInputManual {
       return false
     }
 
-    useEffect(()=> {
+    useEffect(() => {
+      // refresh field by parent (form)
       if (initialState.value === '') setDate(initialState.value)
-    },[initialState])
+    }, [initialState])
 
     return (
-      <div className={styles.calculatorInputManual}>
-        <Input.$
-          value={date}
-          label={label}
-          name={name}
-          size={Input.Size.Medium}
-          onChange={onChangeHandler}
-          onBlur={isDateValid}
-          placeholder="DD / MM / YYYY"
-          maxLength={14}
-          isError={!valid}
-          errorMessage={!valid ? errorMessage : []}
-          testId={name}
-        />
-      </div>
+      <Input.$
+        value={date}
+        label={label}
+        name={name}
+        size={Input.Size.Medium}
+        width={Input.Width.Full}
+        onChange={onChangeHandler}
+        onBlur={isDateValid}
+        placeholder="DD / MM / YYYY"
+        maxLength={14}
+        isError={!valid}
+        errorMessage={!valid ? errorMessage : []}
+        testId={name}
+      />
     );
   };
 }

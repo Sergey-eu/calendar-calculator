@@ -61,6 +61,7 @@ export namespace Input {
 
     const inputFieldClassNames = cx(styles.input__field, {
       [styles.input__field_size_medium]: size === Size.Medium,
+      [styles.input__field_error]: isError && filled,
     });
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,25 +81,23 @@ export namespace Input {
     return (
       <div className={inputClassNames}>
         {label && <div className={titleClassNames}>{label}</div>}
-        <div className={styles.input__control}>
-          <input
-            data-testid={testId}
-            className={inputFieldClassNames}
-            type={type}
-            placeholder={placeholder}
-            name={name}
-            value={value}
-            disabled={disabled}
-            maxLength={maxLength}
-            onChange={onChangeHandler}
-            onBlur={onBlurHandler}
-            onFocus={onFocusHandler}
-          />
-          {errorMessage?.length !== 0 && filled && <div className={styles.input__errorMessage}>
-            {errorMessage?.map((error, i) => <div key={i}>◦{error}</div>)}
-          </div>
-          }
+        <input
+          data-testid={testId}
+          className={inputFieldClassNames}
+          type={type}
+          placeholder={placeholder}
+          name={name}
+          value={value}
+          disabled={disabled}
+          maxLength={maxLength}
+          onChange={onChangeHandler}
+          onBlur={onBlurHandler}
+          onFocus={onFocusHandler}
+        />
+        {errorMessage?.length !== 0 && filled && <div className={styles.input__errorMessage}>
+          {errorMessage?.map((error, i) => <div key={i}>◦{error}</div>)}
         </div>
+        }
       </div>
     );
   };

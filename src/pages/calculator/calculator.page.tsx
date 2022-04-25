@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Button } from '../../components/common';
-import { CalculatorInputManual, CalculatorLog } from '../../components/calculator';
+import { CalculatorInput, CalculatorLog } from '../../components/calculator';
 import { getDateParts } from '../../helpers/common-functions';
 
 import styles from './calculator.module.scss';
@@ -10,8 +10,8 @@ export const Calculator: FC = () => {
     value: '',
     valid: false
   }
-  const [startDate, setStartDate] = useState<CalculatorInputManual.InputProps>(initialFieldState)
-  const [endDate, setEndDate] = useState<CalculatorInputManual.InputProps>(initialFieldState)
+  const [startDate, setStartDate] = useState<CalculatorInput.InputProps>(initialFieldState)
+  const [endDate, setEndDate] = useState<CalculatorInput.InputProps>(initialFieldState)
   const [formValid, setFormValid] = useState<boolean>(false)
   const [logData, setLogData] = useState<Array<CalculatorLog.ItemProps>>([])
 
@@ -48,9 +48,9 @@ export const Calculator: FC = () => {
     <div className={styles.calculator}>
       <fieldset className={styles.calculator__form}>
         <legend>Experiment duration calculator</legend>
-        <CalculatorInputManual.$ initialState={startDate} name='start-date' label='Start date' onChange={setStartDate} />
-        <CalculatorInputManual.$ initialState={endDate} name='end-date' label='End date' onChange={setEndDate} />
-        <div className={styles.calculator__formAction}>
+        <CalculatorInput.$ initialState={startDate} name='start-date' label='Start date' onChange={setStartDate} />
+        <CalculatorInput.$ initialState={endDate} name='end-date' label='End date' onChange={setEndDate} />
+        <div className={styles.calculator__action}>
           <Button.$ label='Calculate' theme={Button.Theme.Primary} size={Button.Size.Medium} width={Button.Width.Full} onClick={getDays} disabled={!formValid} testId='get-days' />
         </div>
       </fieldset>

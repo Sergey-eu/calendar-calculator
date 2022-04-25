@@ -20,10 +20,10 @@
     display: grid;
     width: 100%;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
 
-    &Action {
-      padding-top: 32px;
-    }
+  &__action {
+    padding-top: 32px;
   }
 
   &__legend {

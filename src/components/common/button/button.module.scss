@@ -11,7 +11,7 @@
   justify-content: center;
   transition: opacity $duration1 $easing1, background-color $duration1 $easing1;
   padding: 0 10px;
-  color: #fff;
+  color: $mono-1;
   vertical-align: top;
   max-width: 100%;
   overflow: hidden;
@@ -49,13 +49,8 @@
       padding-bottom: 14px;
       min-width: 160px;
       border-radius: 10px;
-
-      .button {
-        &__label {
-          font-size: 16px;
-          line-height: 20px;
-        }
-      }
+      font-size: 16px;
+      line-height: 20px;
     }
   }
 

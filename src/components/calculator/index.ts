@@ -1,2 +1,2 @@
-export * from './calculator-input-manual';
+export * from './calculator-input';
 export * from './calculator-log';

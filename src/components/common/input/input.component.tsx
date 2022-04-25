@@ -25,7 +25,7 @@ export namespace Input {
     width?: Width;
     maxLength?: number;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    onBlur?: (value: string) => void;
+    onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
     testId?: string;
   }>;
 
@@ -64,17 +64,17 @@ export namespace Input {
       [styles.input__field_error]: isError && filled,
     });
 
-    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       setFilled(event.target.value.length === maxLength)
       onChange(event);
     };
 
-    const onBlurHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onBlurHandler = (event: ChangeEvent<HTMLInputElement>) => {
       setFilled(true)
-      onBlur?.(event.target.value);
+      onBlur?.(event);
     };
 
-    const onFocusHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onFocusHandler = (event: ChangeEvent<HTMLInputElement>) => {
       setFilled(event.target.value.length === maxLength)
     }
 

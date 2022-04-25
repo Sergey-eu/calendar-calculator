@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Button } from '../../components/common';
 import { CalculatorInput, CalculatorLog } from '../../components/calculator';
-import { getDateParts } from '../../helpers/common-functions';
+import { getDateParts } from '../../helpers/date-functions';
 
 import styles from './calculator.module.scss';
 
@@ -31,12 +31,24 @@ export const Calculator: FC = () => {
     // but the first day is included in "startTime" completely, so it needs to be offset by "-1"
     // time difference may be non-integer due to daylight saving time, so it needs to be rounded
     const daysDifference = Math.round((endTime - startTime) / (1000 * 3600 * 24)) - 1;
+
+    const durationResult = (daysDifference: number) => {
+      switch (true) {
+        case (daysDifference === -1):
+          return `Error: "End Date" and "Start Date" are the same`
+        case (daysDifference < -1):
+          return `Error: "End Date" can't be earlier than "Start Date"`
+        default:
+          return daysDifference
+      }
+    }
+
     setLogData([
       {
         id: new Date().toISOString(),
         start: startDate.value.replace(/\s/g, ""),
         end: endDate.value.replace(/\s/g, ""),
-        duration: daysDifference < 0 ? `Error: "End Date" can't be earlier than "Start Date"` : daysDifference
+        duration: durationResult(daysDifference)
       },
       ...logData
     ])

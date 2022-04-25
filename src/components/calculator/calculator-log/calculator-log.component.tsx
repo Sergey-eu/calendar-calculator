@@ -32,7 +32,7 @@ export namespace CalculatorLog {
         <table data-testid={testId}>
           <thead>
             <tr>
-              <th style={{width: '40px'}}>№</th>
+              <th style={{ width: '40px' }}>№</th>
               <th>First day</th>
               <th>Last day</th>
               <th>Duration</th>
@@ -44,7 +44,9 @@ export namespace CalculatorLog {
                 <td>{data.length - i}</td>
                 <td>{item.start}</td>
                 <td>{item.end}</td>
-                <td  data-testid={`duration-${data.length - i}`}>{typeof item.duration  === 'string' ? <small className='error'>{item.duration}</small> : item.duration}</td>
+                <td data-testid={`duration-${data.length - i}`}>
+                  {typeof item.duration === 'string' ? <small className='error'>{item.duration}</small> : item.duration}
+                </td>
               </tr>
             )}
           </tbody>

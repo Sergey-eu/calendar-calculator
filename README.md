@@ -10,6 +10,8 @@ I guess, scientist should be informed about the incorrect range, therefore, an e
 3. The native HTML5 datepicker as an input would provide a better UX, especially for mobile devices, but was not considered because it could display data in `dd.mm.yyyy` format depending on location, that is not allowed.
 4. Using additional libraries for input-mask, form validating and submitting would make the solution cleaner and more scalable, but in terms of needs (1 mask and 1 one form for two fields) it looks like an overhead for the test mini-project, so everything is custom.
 
+<img width="688" alt="image" src="https://user-images.githubusercontent.com/55620779/165094262-8a5ed94c-cde4-42c6-866b-cf515b3af60d.png">
+
 ## Available Scripts
 
 After `yarn install` from the project directory, you can run:
